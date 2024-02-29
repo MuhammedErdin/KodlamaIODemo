@@ -8,23 +8,28 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //Course();
-            CourseManager courseManager = new CourseManager(new EfCourseDal());
-
-            foreach (var course in courseManager.GetCourseDetails())
-            {
-                Console.WriteLine(course.CategoryName + " / " + course.FirstName + " / "
-                    + course.LastName + " / " + course.Descriptions + " / " + course.Price);
-            }
+            //GetCourseDetails();
         }
 
-        private static void Course()
-        {
-            CourseManager courseManager = new CourseManager(new EfCourseDal());
+        //private static void GetCourseDetails()
+        //{
+        //    CourseManager courseManager = new CourseManager(new EfCourseDal());
 
-            foreach (var course in courseManager.GetAll())
-            {
-                Console.WriteLine(course.CourseName + " / " + course.Descriptions + " / " + course.Price);
-            }
-        }
+        //    foreach (var course in courseManager.GetCourseDetails())
+        //    {
+        //        Console.WriteLine(course.CategoryName + " / " + course.FirstName + " / "
+        //            + course.LastName + " / " + course.Descriptions + " / " + course.Price);
+        //    }
+        //}
+
+        //private static void Course()
+        //{
+        //    CourseManager courseManager = new CourseManager(new EfCourseDal());
+
+        //    foreach (var course in courseManager.GetAll())
+        //    {
+        //        Console.WriteLine(course.CourseName + " / " + course.Descriptions + " / " + course.Price);
+        //    }
+        //}
     }
 }
