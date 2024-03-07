@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,21 +26,16 @@ namespace Business.Concrete
             _courseDal = courseDal;
         }
 
+        [ValidationAspect(typeof(CourseValidator))]
         public IResult Add(Course course)
         {
-            if (course.CourseName.Length > 3 && course.Price > 0)
-            {
-                _courseDal.Add(course);
-                return new SuccessResult(Messages.CourseAdded);
-            }
-
-            return new ErrorResult(Messages.CourseNameInvalid);
-            
+            _courseDal.Add(course);
+            return new SuccessResult(Messages.CourseAdded);
         }
 
         public IDataResult<List<Course>> GetAll()
         {
-            if(DateTime.Now.Hour == 16)
+            if(DateTime.Now.Hour == 12)
             {
                 return new ErrorDataResult<List<Course>>(Messages.Error);
             }
@@ -51,6 +49,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CourseDeleted);
         }
 
+        [ValidationAspect(typeof(CourseValidator))]
         public IResult Update(Course course)
         {
             _courseDal.Update(course);

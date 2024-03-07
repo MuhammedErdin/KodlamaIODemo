@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,15 +24,11 @@ namespace Business.Concrete
             _instructorDal = instructorDal;
         }
 
+        [ValidationAspect(typeof(InstructorValidator))]
         public IResult Add(Instructor ınstructor)
         {
-            if (ınstructor.FirstName.Length > 2 && ınstructor.LastName.Length > 2)
-            {
-                _instructorDal.Add(ınstructor);
-                return new SuccessResult(Messages.InstructorAdded);
-            }
-
-            return new ErrorResult(Messages.InstructorNameInvalid);
+            _instructorDal.Add(ınstructor);
+            return new SuccessResult(Messages.InstructorAdded);
         }
 
         public IDataResult<List<Instructor>> GetAll()
@@ -43,6 +42,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.InstructorDeleted);
         }
 
+        [ValidationAspect(typeof(InstructorValidator))]
         public IResult Update(Instructor ınstructor)
         {
             _instructorDal.Update(ınstructor);

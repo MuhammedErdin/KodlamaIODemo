@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -22,16 +25,11 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Add(Category category)
         {
-            if (category.CategoryName.Length > 3)
-            {
-                _categoryDal.Add(category);
-                return new SuccessResult(Messages.CategoryAdded);
-            }
-
-            return new ErrorResult(Messages.CategoryNameInvalid);
-
+            _categoryDal.Add(category);
+            return new SuccessResult(Messages.CategoryAdded);
         }
 
         public IDataResult<List<Category>> GetAll()
@@ -45,6 +43,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryDeleted);
         }
 
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Update(Category category)
         {
             _categoryDal.Update(category);

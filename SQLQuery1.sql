@@ -1,6 +1,6 @@
 ﻿Create table Courses 
 (
-Id int, CourseName varchar(255), CategoryId int, InstructorId int, 
+Id int Primary Key, CourseName varchar(255), CategoryId int, InstructorId int, 
 Descriptions varchar(255), Price Decimal(10,2) 
 );
 INSERT INTO Courses (Id, CourseName, CategoryId, InstructorId, Descriptions, Price) VALUES 
@@ -11,7 +11,7 @@ INSERT INTO Courses (Id, CourseName, CategoryId, InstructorId, Descriptions, Pri
 
 Create table Instructors
 (
-InstructorId int, FirstName varchar(255), LastName varchar(255) Primary Key
+InstructorId int Primary Key, FirstName varchar(255), LastName varchar(255)
 );
 INSERT INTO Instructors (InstructorId, FirstName, LastName) VALUES 
 (1, 'Engin', 'Demiroğ'),
@@ -19,11 +19,11 @@ INSERT INTO Instructors (InstructorId, FirstName, LastName) VALUES
 
 Create table Categories
 (
-CategoryId int, CategoryName varchar(255)
+CategoryId int Primary Key, CategoryName varchar(255)
 );
 INSERT INTO Categories (CategoryId, CategoryName) VALUES 
 (1, 'Back-End'),
 (2, 'Front-End'),
 (3, 'DataBases');
 
---Drop table Courses;
+Drop table Categories;

@@ -82,9 +82,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getcoursedetails")]
-        public IActionResult GetCourseDetails(int id)
+        public IActionResult GetCourseDetails(int CategoryId)
         {
-            var result = _courseService.GetCourseDetails(c=>c.Id==id);
+            var result = _courseService.GetCourseDetails(c => c.CategoryId == CategoryId);
 
             if (result.Success)
             {
